@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     // variables
-
-
+    var score = 0;
+    var counter = 5;
 
 
     //Once Button is clicked
@@ -10,12 +10,25 @@ $(document).ready(function () {
     $(".btn").click(function () {
 
         // The timer
-        
+        setInterval(timer, 1000);
 
-        $(".lead").html("Time Remaining: ");
+        function timer() {
+            counter--;
+            $(".lead").html("Time Remaining: " + counter); 
+
+            // When timer hits 0
+            if (counter < 1) {
+                $(".lead").html("Time Remaining: 0"); 
+                $(".q-one h2").html("Correct Answers:  ");
+                $(".q-two h2").html("Wrong Answers:  ");
+                $("p").hide();
+            }
+
+            
+        }
+
         // Hides the button
         $(".btn").hide();
-
 
         //Questions
         // Question 1
@@ -33,6 +46,10 @@ $(document).ready(function () {
         $(".two-2").html("Star Wars");
         $(".two-3").html("Shaft");
         $(".two-4").html("Avengers");
+
+        // Once timer hits zero
+
+        
 
 
 
