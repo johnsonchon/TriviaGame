@@ -14,9 +14,10 @@ body {
 }
 
 
-.row h2 {
+.q-one h2 {
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
+    padding-top: 40px;
 }
 
 .row p {
