@@ -4,81 +4,46 @@ $(document).ready(function () {
     var counter = 5;
     var correct = 0;
     var incorrect = 0;
+    var time;
+    var numQuestions = 4;
 
+    function done() {
+        for (var i = 0; i < numQuestions; i++) {		
+            var returnValue = $('input[name=question-' + i + ']:checked').val();
+            console.log(returnValue);
+        };
+    };
 
+    function timer() {
+        counter--;
+        $(".lead").html("Time Remaining: " + counter);
+
+        // When timer hits 0
+        if (counter <= 0) {
+            $(".lead").text("Time Remaining: 0");
+            $(".q-one").text();
+            $(".correct").text("Correct Answers:  " + correct);
+            $(".wrong").text("Wrong Answers:  " + incorrect);
+            $(".quiz p").hide();
+            clearInterval(time);
+            done();
+        };
+    };
     //Once Button is clicked
 
-    $(".btn").click(function () {
 
-        
+
+    $(".btn").click(function () {
         // Hides the button
         $(".btn").hide();
-
         for (var i = 0; i < questions.length; i++) {
             $(".q-one").append("<h2>" + questions[i].question + "</h2>");
             for (var j = 0; j < questions[i].answers.length; j++) {
-                $(".q-one").append("<input type='radio' name = 'question- " + i + "' value='" + questions[i].answers[j] + "'>" + questions[i].answers[j])
+                $(".q-one").append("<input type='radio' name = 'question-" + i + "' value='" + questions[i].answers[j] + "'>" + questions[i].answers[j])
             }
         }
-
         // The timer
-        setInterval(timer, 1000);
-
-        function timer() {
-            counter--;
-            $(".lead").html("Time Remaining: " + counter);
-
-            // When timer hits 0
-            if (counter <= 0) {
-                $(".lead").html("Time Remaining: 0");
-                $(".q-one").hide();
-                $(".correct").html("Correct Answers:  " + correct);
-                $(".wrong").html("Wrong Answers:  " + incorrect);
-                $(".quiz p").hide();
-                
-            }
-            
-        }
-
-        
-
-        function done () {
-            $.each($("input[name='question-0]':checked"), function () {
-                if($(this).val()==questions[0].correctAnswer) {
-                    correct++;
-                }
-                else {
-                    incorrect++;
-                }
-            })
-            $.each($("input[name='question-1]':checked"), function () {
-                if($(this).val()==questions[1].correctAnswer) {
-                    correct++;
-                }
-                else {
-                    incorrect++;
-                }
-            })
-            $.each($("input[name='question-2]':checked"), function () {
-                if($(this).val()==questions[2].correctAnswer) {
-                    correct++;
-                }
-                else {
-                    incorrect++;
-                }
-            })
-            $.each($("input[name='question-3]':checked"), function () {
-                if($(this).val()==questions[3].correctAnswer) {
-                    correct++;
-                }
-                else {
-                    incorrect++;
-                }
-            })
-        }
-        
-
-
+        time = setInterval(timer, 1000);
     })
 
 
@@ -101,8 +66,5 @@ $(document).ready(function () {
         answers: ["Pulp Fiction", "Star Wars", "Shaft", "Avengers"],
         correctAnswer: "Avengers"
     }];
-
-
-
 
 });
